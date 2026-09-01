@@ -1,87 +1,18 @@
 {
-  "name": "Дневник и Калькулятор 1ПМ",
+  "name": "Дневник & Калькулятор 1ПМ",
   "short_name": "1ПМ Дневник",
-  "description": "Приложение для отслеживания тренировок, расчёта 1ПМ и анатомической визуализации нагрузок",
-  "id": "./index.html",
+  "description": "Приложение для фиксации подходов, расчета 1ПМ, таймера отдыха и визуализации анатомии.",
   "start_url": "./index.html",
-  "scope": "./",
   "display": "standalone",
-  "display_override": ["standalone", "minimal-ui"],
-  "background_color": "#121212",
-  "theme_color": "#121212",
-  "lang": "ru",
-  "dir": "ltr",
+  "background_color": "#121214",
+  "theme_color": "#121214",
   "orientation": "portrait",
-  "prefer_related_applications": false,
-  "related_applications": [],
-  "categories": ["sports", "fitness", "utilities"],
   "icons": [
     {
-      "src": "https://dummyimage.com/192x192/ff9800/ffffff.png&text=1PM",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "https://dummyimage.com/512x512/ff9800/ffffff.png&text=1PM",
-      "sizes": "512x512",
-      "type": "image/png",
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' fill='%23121214'/><circle cx='256' cy='256' r='180' fill='%23ff9f0a'/><text x='50%' y='55%' dominant-baseline='middle' text-anchor='middle' font-size='220' font-weight='bold' fill='%23121214'>1</text></svg>",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml",
       "purpose": "any maskable"
     }
-  ],
-  "screenshots": [
-    {
-      "src": "https://dummyimage.com/640x1136/1e1e1e/ff9800.png&text=Mobile+View",
-      "sizes": "640x1136",
-      "type": "image/png",
-      "form_factor": "narrow",
-      "label": "Интерфейс приложения на смартфоне"
-    },
-    {
-      "src": "https://dummyimage.com/1280x800/1e1e1e/ff9800.png&text=Desktop+View",
-      "sizes": "1280x800",
-      "type": "image/png",
-      "form_factor": "wide",
-      "label": "Интерфейс приложения на компьютере"
-    }
-  ],
-  "shortcuts": [
-    {
-      "name": "Калькулятор 1ПМ",
-      "short_name": "1ПМ",
-      "description": "Быстрый переход к калькулятору одноповторного максимума",
-      "url": "./index.html#calc-tab",
-      "icons": [{ "src": "https://dummyimage.com/192x192/ff9800/ffffff.png&text=1PM", "sizes": "192x192" }]
-    },
-    {
-      "name": "Программа тренировок",
-      "short_name": "Тренировки",
-      "description": "Просмотр схемы упражнений и анатомической карты",
-      "url": "./index.html#workout-tab",
-      "icons": [{ "src": "https://dummyimage.com/192x192/ff9800/ffffff.png&text=1PM", "sizes": "192x192" }]
-    }
-  ],
-  "launch_handler": {
-    "client_mode": "focus-existing"
-  },
-  "file_handlers": [],
-  "protocol_handlers": [],
-  "widgets": [],
-  "edge_side_panel": {
-    "preferred_width": 480
-  },
-  "note_taking": {
-    "new_note_url": "./index.html"
-  },
-  "share_target": {
-    "action": "./index.html",
-    "method": "GET",
-    "params": {
-      "title": "title",
-      "text": "text",
-      "url": "url"
-    }
-  },
-  "iarc_rating_id": "",
-  "scope_extensions": []
+  ]
 }
