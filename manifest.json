@@ -1,16 +1,23 @@
 {
   "name": "Пронатор 1ПМ",
   "short_name": "Пронатор",
+  "description": "Приложение для расчета 1ПМ и ведения тренировок пронации в армрестлинге",
   "start_url": "index.html",
   "display": "standalone",
   "background_color": "#121212",
   "theme_color": "#ff9800",
   "icons": [
     {
-      "src": "https://via.placeholder.com/512/ff9800/ffffff?text=P",
+      "src": "https://dummyimage.com/512x512/ff9800/ffffff.png&text=P",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
+    },
+    {
+      "src": "https://dummyimage.com/512x512/ff9800/ffffff.png&text=P",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
     }
   ]
 }
