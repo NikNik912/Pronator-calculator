@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Дневник Пронации 1ПМ</title>
+    <style>
+        body { font-family: -apple-system, sans-serif; background: #121212; color: #e0e0e0; margin: 0; padding: 16px; }
+        .card { background: #1e1e1e; border-radius: 12px; padding: 16px; margin-bottom: 16px; border: 1px solid #333; }
+        h2, h3 { color: #ff9800; margin-top: 0; }
+        label { display: block; margin-bottom: 8px; color: #a0a0a0; font-size: 14px; }
+        input[type="range"] { width: 100%; accent-color: #ff9800; }
+        .val { font-size: 24px; font-weight: bold; color: #fff; text-align: center; margin: 8px 0; }
+        .box { background: #282828; border-left: 4px solid #ff9800; padding: 12px; border-radius: 4px; margin-bottom: 12px; }
+        .box-green { border-left-color: #4caf50; }
+        .title { font-weight: bold; color: #fff; margin-bottom: 4px; }
+        .desc { font-size: 14px; color: #a0a0a0; }
+        table { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 14px; }
+        th, td { padding: 8px; text-align: left; border-bottom: 1px solid #333; }
+        th { color: #a0a0a0; }
+        input[type="checkbox"] { width: 18px; height: 18px; accent-color: #ff9800; }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h2>Калькулятор Пронации</h2>
+    <label>Текущий 1ПМ (кг):</label>
+    <input type="range" id="rm" min="15" max="60" value="30" step="0.5" oninput="update()">
+    <div class="val"><span id="rmVal">30</span> кг</div>
+</div>
+
+<div class="card">
+    <h3>Подсобные сессии (2 р/нед)</h3>
+    <div class="box">
+        <div class="title">Сессия 1: Связочная жесткость</div>
+        <div class="desc" id="s1"></div>
+    </div>
+    <div class="box box-green">
+        <div class="title">Сессия 2: Трофика и восстановление</div>
+        <div class="desc" id="s2"></div>
+    </div>
+</div>
+
+<div class="card">
+    <h3>Прогрессия на 4 недели</h3>
+    <table>
+        <thead><tr><th>Нед</th><th>С1</th><th>С2</th><th>✓</th></tr></thead>
+        <tbody id="tbl"></tbody>
+    </table>
+</div>
+
+<script>
+function update() {
+    const rm = parseFloat(document.getElementById('rm').value);
+    document.getElementById('rmVal').innerText = rm;
+    const s1 = (rm * 0.8).toFixed(1);
+    const s2Min = (rm * 0.5).toFixed(1);
+    const s2Max = (rm * 0.6).toFixed(1);
+
+    document.getElementById('s1').innerText = `Вес: ${s1} кг | 3–4 с × 4–5 повт (или статика 8–10с) | Отдых 3 мин`;
+    document.getElementById('s2').innerText = `Вес: ${s2Min}–${s2Max} кг | 3 с × 15–20 повт | Отдых 1.5 мин`;
+
+    document.getElementById('tbl').innerHTML = `
+        <tr><td>1 (Объем)</td><td>${(s1 * 0.95).toFixed(1)} кг (4×5)</td><td>${s2Min} кг (3×20)</td><td><input type="checkbox"></td></tr>
+        <tr><td>2 (Сила)</td><td>${s1} кг (4×4)</td><td>${s2Max} кг (3×15)</td><td><input type="checkbox"></td></tr>
+        <tr><td>3 (Пик)</td><td>${(s1 * 1.05).toFixed(1)} кг (3×3)</td><td>${s2Max} кг (3×15)</td><td><input type="checkbox"></td></tr>
+        <tr><td>4 (Делоад)</td><td>${(s1 * 0.7).toFixed(1)} кг (3×5)</td><td>${s2Min} кг (2×15)</td><td><input type="checkbox"></td></tr>
+    `;
+}
+update();
+</script>
+
+</body>
+</html>
