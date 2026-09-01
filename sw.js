@@ -3,9 +3,7 @@ const ASSETS_TO_CACHE = [
   './',
   './index.html',
   './manifest.json',
-  './icons/icon-192.png',
-  './icons/icon-512.png',
-  './icons/maskable.png'
+  './icon.svg'
 ];
 
 // Установка Service Worker и кеширование файлов
@@ -18,7 +16,7 @@ self.addEventListener('install', (event) => {
   self.skipWaiting();
 });
 
-// Активация и очистка старого кеша
+// Активация и удаление устаревших версий кеша
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then((cacheNames) => {
@@ -34,7 +32,7 @@ self.addEventListener('activate', (event) => {
   self.clients.claim();
 });
 
-// Перехват сетевых запросов для работы без интернета
+// Офлайн-режим с отдачей из кеша
 self.addEventListener('fetch', (event) => {
   event.respondWith(
     caches.match(event.request).then((cachedResponse) => {
