@@ -9,20 +9,16 @@
   "orientation": "portrait",
   "icons": [
     {
-      "src": "icons/icon-192.png",
+      "src": "./icon-192.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any"
     },
     {
-      "src": "icons/icon-512.png",
-      "sizes": "512x512",
-      "type": "image/png"
-    },
-    {
-      "src": "icons/maskable.png",
+      "src": "./icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "maskable"
+      "purpose": "any maskable"
     }
   ],
   "shortcuts": [
@@ -31,29 +27,24 @@
       "short_name": "+ Подход",
       "description": "Быстрый переход к записи нового подхода",
       "url": "./index.html?action=add_set",
-      "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }]
+      "icons": [
+        {
+          "src": "./icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
     },
     {
       "name": "Таймер отдыха",
       "short_name": "Таймер",
       "description": "Открыть таймер отдыха",
       "url": "./index.html?action=timer",
-      "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }]
-    }
-  ],
-  "widgets": [
-    {
-      "name": "Статус тренировки",
-      "short_name": "1ПМ Статус",
-      "description": "Виджет таймера и текущего подхода на рабочем столе",
-      "tag": "gym-status-widget",
-      "template": "widget-template",
-      "ms_ac_template": "./widget.json",
-      "screenshots": [
+      "icons": [
         {
-          "src": "icons/icon-512.png",
-          "sizes": "512x512",
-          "label": "Виджет статуса"
+          "src": "./icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
         }
       ]
     }
