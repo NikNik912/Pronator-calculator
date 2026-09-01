@@ -13,6 +13,7 @@
   "dir": "ltr",
   "orientation": "portrait",
   "prefer_related_applications": false,
+  "related_applications": [],
   "categories": ["sports", "fitness", "utilities"],
   "icons": [
     {
@@ -59,5 +60,28 @@
       "url": "./index.html#workout-tab",
       "icons": [{ "src": "https://dummyimage.com/192x192/ff9800/ffffff.png&text=1PM", "sizes": "192x192" }]
     }
-  ]
+  ],
+  "launch_handler": {
+    "client_mode": "focus-existing"
+  },
+  "file_handlers": [],
+  "protocol_handlers": [],
+  "widgets": [],
+  "edge_side_panel": {
+    "preferred_width": 480
+  },
+  "note_taking": {
+    "new_note_url": "./index.html"
+  },
+  "share_target": {
+    "action": "./index.html",
+    "method": "GET",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url"
+    }
+  },
+  "iarc_rating_id": "",
+  "scope_extensions": []
 }
