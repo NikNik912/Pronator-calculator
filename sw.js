@@ -1,11 +1,14 @@
-const CACHE_NAME = 'gym-tracker-v1';
+const CACHE_NAME = 'gym-tracker-v2';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
-  './manifest.json'
+  './manifest.json',
+  './icons/icon-192.png',
+  './icons/icon-512.png',
+  './icons/maskable.png'
 ];
 
-// Установка Service Worker и кеширование ассетов
+// Установка Service Worker и кеширование файлов
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
@@ -15,19 +18,23 @@ self.addEventListener('install', (event) => {
   self.skipWaiting();
 });
 
-// Активация и удаление старого кеша
+// Активация и очистка старого кеша
 self.addEventListener('activate', (event) => {
   event.waitUntil(
-    caches.keys().then((keys) => {
+    caches.keys().then((cacheNames) => {
       return Promise.all(
-        keys.filter((key) => key !== CACHE_NAME).map((key) => caches.delete(key))
+        cacheNames.map((cache) => {
+          if (cache !== CACHE_NAME) {
+            return caches.delete(cache);
+          }
+        })
       );
     })
   );
   self.clients.claim();
 });
 
-// Стратегия: Cache First, затем Fetch
+// Перехват сетевых запросов для работы без интернета
 self.addEventListener('fetch', (event) => {
   event.respondWith(
     caches.match(event.request).then((cachedResponse) => {
@@ -43,6 +50,8 @@ self.addEventListener('fetch', (event) => {
           cache.put(event.request, responseToCache);
         });
         return networkResponse;
+      }).catch(() => {
+        return caches.match('./index.html');
       });
     })
   );
