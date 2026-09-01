@@ -1,35 +1,45 @@
 {
-  "id": "index.html",
-  "name": "Пронатор 1ПМ",
-  "short_name": "Пронатор",
-  "description": "Приложение для расчета 1ПМ и ведения тренировок пронации в армрестлинге",
-  "start_url": "index.html",
+  "name": "Дневник и Калькулятор 1ПМ",
+  "short_name": "1ПМ Дневник",
+  "description": "Приложение для отслеживания тренировок, расчёта 1ПМ и анатомической визуализации нагрузок",
+  "start_url": "./index.html",
+  "scope": "./",
   "display": "standalone",
-  "orientation": "portrait",
+  "display_override": ["standalone", "minimal-ui"],
   "background_color": "#121212",
-  "theme_color": "#ff9800",
-  "categories": ["sports", "utilities"],
+  "theme_color": "#121212",
+  "lang": "ru",
+  "dir": "ltr",
+  "orientation": "portrait",
+  "categories": ["sports", "fitness", "utilities"],
   "icons": [
     {
-      "src": "https://dummyimage.com/512x512/ff9800/ffffff.png&text=P",
-      "sizes": "512x512",
+      "src": "https://dummyimage.com/192x192/ff9800/ffffff.png&text=1PM",
+      "sizes": "192x192",
       "type": "image/png",
-      "purpose": "any"
+      "purpose": "any maskable"
     },
     {
-      "src": "https://dummyimage.com/512x512/ff9800/ffffff.png&text=P",
+      "src": "https://dummyimage.com/512x512/ff9800/ffffff.png&text=1PM",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "maskable"
+      "purpose": "any maskable"
     }
   ],
-  "screenshots": [
+  "shortcuts": [
     {
-      "src": "https://dummyimage.com/1080x1920/121212/ff9800.png&text=Pronator+App",
-      "sizes": "1080x1920",
-      "type": "image/png",
-      "form_factor": "narrow",
-      "label": "Главный экран"
+      "name": "Калькулятор 1ПМ",
+      "short_name": "1ПМ",
+      "description": "Быстрый переход к калькулятору одноповторного максимума",
+      "url": "./index.html#calc-tab",
+      "icons": [{ "src": "https://dummyimage.com/192x192/ff9800/ffffff.png&text=1PM", "sizes": "192x192" }]
+    },
+    {
+      "name": "Программа тренировок",
+      "short_name": "Тренировки",
+      "description": "Просмотр схемы упражнений и анатомической карты",
+      "url": "./index.html#workout-tab",
+      "icons": [{ "src": "https://dummyimage.com/192x192/ff9800/ffffff.png&text=1PM", "sizes": "192x192" }]
     }
   ]
 }
