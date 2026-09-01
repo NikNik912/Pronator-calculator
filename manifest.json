@@ -2,6 +2,7 @@
   "name": "Дневник и Калькулятор 1ПМ",
   "short_name": "1ПМ Дневник",
   "description": "Приложение для отслеживания тренировок, расчёта 1ПМ и анатомической визуализации нагрузок",
+  "id": "./index.html",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
@@ -11,6 +12,7 @@
   "lang": "ru",
   "dir": "ltr",
   "orientation": "portrait",
+  "prefer_related_applications": false,
   "categories": ["sports", "fitness", "utilities"],
   "icons": [
     {
@@ -24,6 +26,22 @@
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "https://dummyimage.com/640x1136/1e1e1e/ff9800.png&text=Mobile+View",
+      "sizes": "640x1136",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Интерфейс приложения на смартфоне"
+    },
+    {
+      "src": "https://dummyimage.com/1280x800/1e1e1e/ff9800.png&text=Desktop+View",
+      "sizes": "1280x800",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Интерфейс приложения на компьютере"
     }
   ],
   "shortcuts": [
