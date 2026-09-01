@@ -731,6 +731,25 @@
 
     calculate1RM();
     updateTimerDisplay();
-  </script>
+ calculate1RM();
+    updateTimerDisplay();
+    autoSelectMuscle();
+
+    // Обработка параметров URL при запуске с виджета или ярлыка
+    window.addEventListener('DOMContentLoaded', () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const action = urlParams.get('action');
+
+      if (action === 'add_set') {
+        document.querySelector('.tab-btn[onclick*="diary"]').click();
+        setTimeout(() => {
+          document.getElementById('ex-weight').focus();
+        }, 300);
+      } else if (action === 'timer') {
+        document.querySelector('.tab-btn[onclick*="diary"]').click();
+        startTimer();
+      }
+    });
+ </script>
 </body>
 </html>
