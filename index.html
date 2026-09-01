@@ -2,315 +2,212 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Дневник и Калькулятор 1ПМ</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Дневник & Калькулятор 1ПМ</title>
   <link rel="manifest" href="manifest.json">
-  <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('sw.js');
-    }
-  </script>
+  <meta name="theme-color" content="#121212">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <style>
-    :root {
-      --bg-color: #121212;
-      --card-bg: #1e1e1e;
-      --accent: #ff9800;
-      --text: #ffffff;
-      --text-dim: #b0b0b0;
-      --border: #333333;
-      --success: #00e676;
-    }
-
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      -webkit-tap-highlight-color: transparent;
     }
-
     body {
-      background-color: var(--bg-color);
-      color: var(--text);
-      padding-bottom: 75px;
+      background-color: #121212;
+      color: #e0e0e0;
+      padding: 16px;
+      max-width: 500px;
+      margin: 0 auto;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
-
     header {
-      background-color: var(--card-bg);
-      padding: 15px;
       text-align: center;
-      border-bottom: 1px solid var(--border);
-      position: sticky;
-      top: 0;
-      z-index: 100;
+      margin-bottom: 20px;
+      padding-top: 10px;
     }
-
-    header h1 {
-      font-size: 1.2rem;
-      color: var(--accent);
+    h1 {
+      color: #ff9800;
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
     }
-
     .nav-tabs {
       display: flex;
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: var(--card-bg);
-      border-top: 1px solid var(--border);
-      z-index: 100;
+      gap: 8px;
+      margin-bottom: 20px;
+      background: #1e1e1e;
+      padding: 4px;
+      border-radius: 10px;
+      border: 1px solid #2d2d2d;
     }
-
     .tab-btn {
       flex: 1;
-      padding: 14px;
-      background: none;
+      padding: 10px 4px;
+      background: transparent;
       border: none;
-      color: var(--text-dim);
-      font-size: 0.85rem;
-      font-weight: bold;
+      color: #888;
+      font-size: 13px;
+      font-weight: 600;
+      border-radius: 8px;
       cursor: pointer;
-      transition: 0.2s;
+      transition: all 0.2s ease;
     }
-
     .tab-btn.active {
-      color: var(--accent);
-      border-top: 3px solid var(--accent);
-      background-color: rgba(255, 152, 0, 0.05);
+      background: #2a2a2a;
+      color: #ff9800;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
     }
-
     .tab-content {
       display: none;
-      padding: 16px;
-      max-width: 600px;
-      margin: 0 auto;
     }
-
     .tab-content.active {
       display: block;
     }
-
     .card {
-      background-color: var(--card-bg);
-      padding: 16px;
-      border-radius: 12px;
-      margin-bottom: 16px;
-      border: 1px solid var(--border);
+      background: #1e1e1e;
+      border-radius: 14px;
+      padding: 20px;
+      border: 1px solid #2d2d2d;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+      margin-bottom: 20px;
     }
-
-    .input-group {
-      margin-bottom: 12px;
+    .form-group {
+      margin-bottom: 18px;
     }
-
-    .input-group label {
+    label {
       display: block;
-      font-size: 0.85rem;
-      color: var(--text-dim);
-      margin-bottom: 6px;
+      color: #a0a0a0;
+      font-size: 14px;
+      margin-bottom: 8px;
     }
-
-    .input-group input {
+    input, select {
       width: 100%;
-      padding: 12px;
-      border-radius: 8px;
-      border: 1px solid var(--border);
       background: #2a2a2a;
-      color: #fff;
-      font-size: 1rem;
-    }
-
-    .btn-action {
-      width: 100%;
+      border: 1px solid #3d3d3d;
+      border-radius: 10px;
       padding: 14px;
-      background: var(--accent);
-      border: none;
-      border-radius: 8px;
-      color: #000;
-      font-weight: bold;
-      font-size: 1rem;
-      cursor: pointer;
+      color: #ffffff;
+      font-size: 16px;
+      outline: none;
+      transition: border-color 0.2s;
     }
-
+    input:focus, select:focus {
+      border-color: #ff9800;
+    }
+    input::placeholder {
+      color: #666;
+    }
+    .btn-primary {
+      width: 100%;
+      background: #ff9800;
+      color: #000000;
+      border: none;
+      border-radius: 10px;
+      padding: 15px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+    }
+    .btn-primary:active {
+      transform: scale(0.98);
+      background: #e68a00;
+    }
     .result-box {
+      margin-top: 20px;
       text-align: center;
-      margin-top: 15px;
-      font-size: 1.3rem;
-      font-weight: bold;
-      color: var(--success);
+      min-height: 36px;
     }
-
-    /* Анатомическая визуализация мышц */
-    .body-map-card {
-      text-align: center;
-      position: relative;
-      overflow: hidden;
+    .result-text {
+      color: #00e676;
+      font-size: 22px;
+      font-weight: 700;
     }
-
-    .body-map-title {
-      font-size: 0.95rem;
-      color: var(--text-dim);
-      margin-bottom: 12px;
-    }
-
-    .body-map-container {
-      position: relative;
-      width: 100%;
-      max-width: 340px;
-      margin: 0 auto;
-      height: 320px;
-    }
-
-    .body-svg {
-      width: 100%;
-      height: 100%;
-    }
-
-    .muscle-group-path {
-      transition: fill 0.4s ease;
-    }
-
-    .body-legend {
-      display: flex;
-      justify-content: space-around;
-      margin-top: 12px;
-      padding-top: 10px;
-      border-top: 1px solid var(--border);
-      font-size: 0.75rem;
-      color: var(--text-dim);
-    }
-
-    .legend-item {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-
-    .legend-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-    }
-
-    /* Таймер */
-    .timer-display {
-      font-size: 3rem;
-      font-weight: bold;
-      text-align: center;
-      color: var(--accent);
-      margin: 15px 0;
-      font-family: monospace;
-    }
-
-    .timer-presets {
-      display: flex;
-      gap: 8px;
-      margin-bottom: 15px;
-    }
-
-    .timer-preset-btn {
-      flex: 1;
-      padding: 10px;
-      background: #2a2a2a;
-      border: 1px solid var(--border);
-      color: #fff;
-      border-radius: 6px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    .timer-controls {
-      display: flex;
-      gap: 10px;
-    }
-
-    .timer-btn {
-      flex: 1;
-      padding: 12px;
-      border: none;
-      border-radius: 8px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    .btn-start { background: var(--success); color: #000; }
-    .btn-pause { background: #ffb74d; color: #000; }
-    .btn-reset { background: #e57373; color: #000; }
-
-    /* Список упражнений */
-    .day-selector {
-      display: flex;
-      gap: 8px;
-      margin-bottom: 16px;
-    }
-
-    .day-btn {
-      flex: 1;
-      padding: 10px;
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      color: var(--text-dim);
-      border-radius: 8px;
-      font-size: 0.85rem;
-      cursor: pointer;
-    }
-
-    .day-btn.active {
-      background: var(--accent);
-      color: #000;
-      font-weight: bold;
-      border-color: var(--accent);
-    }
-
-    .workout-list {
+    .anatomy-container {
       display: flex;
       flex-direction: column;
-      gap: 10px;
-    }
-
-    .exercise-item {
-      display: flex;
       align-items: center;
-      justify-content: space-between;
-      background: var(--card-bg);
-      padding: 14px;
+      gap: 16px;
+    }
+    .anatomy-svg {
+      width: 100%;
+      max-width: 280px;
+      height: auto;
+      background: #121212;
       border-radius: 10px;
-      border: 1px solid var(--border);
+      padding: 10px;
     }
-
-    .exercise-item.armwrestling {
-      border-left: 4px solid var(--accent);
-    }
-
-    .exercise-info h4 {
-      font-size: 0.95rem;
-      margin-bottom: 4px;
-    }
-
-    .exercise-info p {
-      font-size: 0.85rem;
-      color: var(--accent);
-      font-weight: bold;
-    }
-
-    .exercise-tag {
-      font-size: 0.7rem;
-      background: rgba(255, 152, 0, 0.2);
-      color: var(--accent);
-      padding: 2px 6px;
-      border-radius: 4px;
-      margin-left: 6px;
-      display: inline-block;
-    }
-
-    .exercise-item input[type="checkbox"] {
-      width: 22px;
-      height: 22px;
-      accent-color: var(--accent);
+    .muscle-group {
+      fill: #333333;
+      stroke: #555555;
+      stroke-width: 1.5;
+      transition: fill 0.3s;
       cursor: pointer;
     }
-
-    .exercise-item.done h4 {
-      text-decoration: line-through;
-      color: var(--text-dim);
+    .muscle-group.active {
+      fill: #ff9800;
+    }
+    .muscle-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+      margin-top: 10px;
+    }
+    .legend-tag {
+      background: #2a2a2a;
+      border: 1px solid #3d3d3d;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      color: #ccc;
+      cursor: pointer;
+    }
+    .legend-tag.active {
+      background: #ff9800;
+      color: #000;
+      font-weight: bold;
+      border-color: #ff9800;
+    }
+    .log-item {
+      background: #2a2a2a;
+      border-radius: 10px;
+      padding: 12px 16px;
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-left: 4px solid #ff9800;
+    }
+    .log-info h4 {
+      color: #fff;
+      font-size: 15px;
+      margin-bottom: 4px;
+    }
+    .log-info p {
+      color: #aaa;
+      font-size: 13px;
+    }
+    .del-btn {
+      background: transparent;
+      border: none;
+      color: #ff5252;
+      font-size: 18px;
+      cursor: pointer;
+      padding: 4px;
+    }
+    footer {
+      margin-top: auto;
+      text-align: center;
+      padding: 15px 0 5px;
+      color: #555;
+      font-size: 12px;
     }
   </style>
 </head>
@@ -320,358 +217,252 @@
     <h1>Дневник & Калькулятор 1ПМ</h1>
   </header>
 
-  <!-- 1. Калькулятор 1ПМ -->
-  <div id="calc-tab" class="tab-content active">
-    <div class="card">
-      <div class="input-group">
-        <label>Вес отягощения (кг)</label>
-        <input type="number" id="weight" placeholder="Например: 20" step="0.5">
-      </div>
-      <div class="input-group">
-        <label>Количество повторений</label>
-        <input type="number" id="reps" placeholder="Например: 15">
-      </div>
-      <button class="btn-action" onclick="calculate1RM()">Рассчитать 1ПМ</button>
-      <div id="result" class="result-box"></div>
-    </div>
-  </div>
-
-  <!-- 2. Программа тренировок -->
-  <div id="workout-tab" class="tab-content">
-    <div class="day-selector">
-      <button class="day-btn active" onclick="switchDay(1)">1 Тренировка</button>
-      <button class="day-btn" onclick="switchDay(2)">2 Тренировка</button>
-      <button class="day-btn" onclick="switchDay(3)">3 Тренировка</button>
-    </div>
-
-    <!-- Анатомическая карта нагрузок -->
-    <div class="card body-map-card">
-      <div class="body-map-title">Проработка групп мышц</div>
-      <div class="body-map-container">
-        <svg class="body-svg" viewBox="0 0 340 320" xmlns="http://www.w3.org/2000/svg">
-          <!-- Базовый контур тела (Серый) -->
-          <g fill="#2c2c2e" stroke="#121212" stroke-width="1.5">
-            <!-- Голова -->
-            <circle cx="170" cy="30" r="14" />
-            <!-- Трапеции / Шея -->
-            <path d="M160 42 L180 42 L195 54 L145 54 Z" />
-            <!-- Грудь -->
-            <path id="muscle-chest" class="muscle-group-path" d="M148 56 L192 56 L190 85 L170 92 L150 85 Z" />
-            <!-- Пресс / Кор -->
-            <path id="muscle-core" class="muscle-group-path" d="M152 87 L188 87 L184 130 L156 130 Z" />
-            <!-- Плечи (Дельты) -->
-            <path id="muscle-shoulders-left" class="muscle-group-path" d="M143 55 L128 72 L140 85 L147 68 Z" />
-            <path id="muscle-shoulders-right" class="muscle-group-path" d="M197 55 L212 72 L200 85 L193 68 Z" />
-            <!-- Руки (Бицепс/Трицепс) -->
-            <path id="muscle-arms-left" class="muscle-group-path" d="M127 74 L117 115 L132 115 L139 85 Z" />
-            <path id="muscle-arms-right" class="muscle-group-path" d="M213 74 L223 115 L208 115 L201 85 Z" />
-            <!-- Предплечья / Пронатор -->
-            <path id="muscle-forearms-left" class="muscle-group-path" d="M115 118 L103 162 L116 162 L130 118 Z" />
-            <path id="muscle-forearms-right" class="muscle-group-path" d="M225 118 L237 162 L224 162 L210 118 Z" />
-            <!-- Ноги / Квадрицепсы -->
-            <path id="muscle-legs-left" class="muscle-group-path" d="M154 133 L168 133 L164 220 L146 220 Z" />
-            <path id="muscle-legs-right" class="muscle-group-path" d="M172 133 L186 133 L194 220 L176 220 Z" />
-            <!-- Икры / Голень -->
-            <path id="muscle-calves-left" class="muscle-group-path" d="M146 223 L162 223 L158 290 L148 290 Z" />
-            <path id="muscle-calves-right" class="muscle-group-path" d="M178 223 L194 223 L192 290 L182 290 Z" />
-          </g>
-
-          <!-- Выносные указатели и метки с процентами -->
-          <!-- Плечи -->
-          <polyline points="134,68 80,68 60,68" stroke="#555" stroke-dasharray="2" fill="none"/>
-          <circle cx="134" cy="68" r="3" fill="#ff9800"/>
-          <text id="lbl-shoulders" x="55" y="65" fill="#fff" font-size="10" text-anchor="end">Плечи: 0%</text>
-
-          <!-- Предплечья / Пронатор -->
-          <polyline points="110,140 70,140 50,140" stroke="#555" stroke-dasharray="2" fill="none"/>
-          <circle cx="110" cy="140" r="3" fill="#ff9800"/>
-          <text id="lbl-forearms" x="45" y="137" fill="#fff" font-size="10" font-weight="bold" text-anchor="end">Пронатор: 0%</text>
-
-          <!-- Ноги -->
-          <polyline points="155,180 80,180 60,180" stroke="#555" stroke-dasharray="2" fill="none"/>
-          <circle cx="155" cy="180" r="3" fill="#ff9800"/>
-          <text id="lbl-legs" x="55" y="177" fill="#fff" font-size="10" text-anchor="end">Ноги: 0%</text>
-
-          <!-- Грудь -->
-          <polyline points="185,70 260,70 280,70" stroke="#555" stroke-dasharray="2" fill="none"/>
-          <circle cx="185" cy="70" r="3" fill="#ff9800"/>
-          <text id="lbl-chest" x="285" y="67" fill="#fff" font-size="10" text-anchor="start">Грудь: 0%</text>
-
-          <!-- Руки / Бицепс / Трицепс -->
-          <polyline points="215,95 260,95 280,95" stroke="#555" stroke-dasharray="2" fill="none"/>
-          <circle cx="215" cy="95" r="3" fill="#ff9800"/>
-          <text id="lbl-arms" x="285" y="92" fill="#fff" font-size="10" text-anchor="start">Руки: 0%</text>
-
-          <!-- Спина / Кор -->
-          <polyline points="175,110 260,110 280,110" stroke="#555" stroke-dasharray="2" fill="none"/>
-          <circle cx="175" cy="110" r="3" fill="#ff9800"/>
-          <text id="lbl-back" x="285" y="107" fill="#fff" font-size="10" text-anchor="start">Спина: 0%</text>
-        </svg>
-      </div>
-
-      <!-- Легенда цвета -->
-      <div class="body-legend">
-        <div class="legend-item"><div class="legend-dot" style="background:#ffb74d"></div>1-19%</div>
-        <div class="legend-item"><div class="legend-dot" style="background:#4fc3f7"></div>20-49%</div>
-        <div class="legend-item"><div class="legend-dot" style="background:#ba68c8"></div>50-79%</div>
-        <div class="legend-item"><div class="legend-dot" style="background:#ff5252"></div>80-100%</div>
-      </div>
-    </div>
-
-    <div id="workout-content" class="workout-list"></div>
-  </div>
-
-  <!-- 3. Таймер отдыха -->
-  <div id="timer-tab" class="tab-content">
-    <div class="card">
-      <h3 style="text-align: center; margin-bottom: 10px;">Таймер отдыха</h3>
-      <div class="timer-display" id="timer-display">01:30</div>
-      
-      <div class="timer-presets">
-        <button class="timer-preset-btn" onclick="setTimer(60)">60с</button>
-        <button class="timer-preset-btn" onclick="setTimer(90)">90с</button>
-        <button class="timer-preset-btn" onclick="setTimer(120)">2 мин</button>
-        <button class="timer-preset-btn" onclick="setTimer(180)">3 мин</button>
-      </div>
-
-      <div class="timer-controls">
-        <button class="timer-btn btn-start" onclick="startTimer()">Старт</button>
-        <button class="timer-btn btn-pause" onclick="pauseTimer()">Пауза</button>
-        <button class="timer-btn btn-reset" onclick="resetTimer()">Сброс</button>
-      </div>
-    </div>
-
-    <!-- Уведомления -->
-    <div class="card">
-      <h3 style="margin-bottom: 12px;">Напоминание о тренировке</h3>
-      <div class="input-group">
-        <label>Время напоминания</label>
-        <input type="time" id="reminder-time" value="18:00">
-      </div>
-      <button class="btn-action" onclick="enableNotifications()">Включить уведомления</button>
-      <div id="notification-status" style="font-size:0.85rem; margin-top:8px; text-align:center; color:var(--text-dim);"></div>
-    </div>
-  </div>
-
-  <!-- Нижняя навигация -->
   <nav class="nav-tabs">
-    <button class="tab-btn active" onclick="switchTab('calc-tab', this)">1ПМ</button>
-    <button class="tab-btn" onclick="switchTab('workout-tab', this)">Программа</button>
-    <button class="tab-btn" onclick="switchTab('timer-tab', this)">Таймер</button>
+    <button class="tab-btn active" onclick="switchTab('calc-tab')">Калькулятор</button>
+    <button class="tab-btn" onclick="switchTab('workout-tab')">Дневник</button>
+    <button class="tab-btn" onclick="switchTab('anatomy-tab')">Анатомия</button>
   </nav>
 
+  <!-- Вкладка Калькулятора -->
+  <main id="calc-tab" class="tab-content active">
+    <div class="card">
+      <div class="form-group">
+        <label for="weight">Вес отягощения (кг)</label>
+        <input type="number" id="weight" placeholder="Например: 20" step="0.5" inputmode="decimal">
+      </div>
+      <div class="form-group">
+        <label for="reps">Количество повторений</label>
+        <input type="number" id="reps" placeholder="Например: 15" inputmode="numeric">
+      </div>
+      <button class="btn-primary" onclick="calculate1RM()">Рассчитать 1ПМ</button>
+      
+      <div class="result-box">
+        <div id="result" class="result-text"></div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Вкладка Дневника -->
+  <main id="workout-tab" class="tab-content">
+    <div class="card">
+      <h3 style="color:#ff9800; margin-bottom:14px; font-size:16px;">Записать подход</h3>
+      <div class="form-group">
+        <label for="ex-name">Упражнение</label>
+        <input type="text" id="ex-name" placeholder="Подъём на пронатор / Подтягивания">
+      </div>
+      <div style="display:flex; gap:10px;">
+        <div class="form-group" style="flex:1;">
+          <label for="ex-weight">Вес (кг)</label>
+          <input type="number" id="ex-weight" placeholder="20">
+        </div>
+        <div class="form-group" style="flex:1;">
+          <label for="ex-reps">Повторы</label>
+          <input type="number" id="ex-reps" placeholder="15">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="ex-muscle">Целевая мышца</label>
+        <select id="ex-muscle">
+          <option value="forearms">Предплечье / Пронатор / Кисть</option>
+          <option value="biceps">Бицепс / Плечелучевая</option>
+          <option value="delts">Плечи / Дельты</option>
+          <option value="back">Спина / Широчайшие</option>
+          <option value="chest">Грудь</option>
+          <option value="legs">Ноги</option>
+        </select>
+      </div>
+      <button class="btn-primary" onclick="addLogEntry()">Сохранить запись</button>
+    </div>
+
+    <div class="card">
+      <h3 style="color:#ff9800; margin-bottom:14px; font-size:16px;">История подходов</h3>
+      <div id="log-list">
+        <p style="color:#666; text-align:center; font-size:14px;">История пока пуста</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- Вкладка Анатомии -->
+  <main id="anatomy-tab" class="tab-content">
+    <div class="card anatomy-container">
+      <h3 style="color:#ff9800; font-size:16px;">Карта нагруженных мышц</h3>
+      <p style="color:#a0a0a0; font-size:13px; text-align:center;">Нажмите на группы мышц для визуализации уровня нагрузки</p>
+      
+      <svg class="anatomy-svg" viewBox="0 0 200 380">
+        <!-- Голова -->
+        <circle cx="100" cy="35" r="20" fill="#333" stroke="#555" stroke-width="1.5" />
+        <!-- Шея -->
+        <rect x="94" y="55" width="12" height="15" fill="#333" stroke="#555" stroke-width="1.5" />
+        <!-- Плечи / Дельты -->
+        <path class="muscle-group delts" d="M 60,70 Q 75,68 88,72 L 85,95 L 60,85 Z" />
+        <path class="muscle-group delts" d="M 140,70 Q 125,68 112,72 L 115,95 L 140,85 Z" />
+        <!-- Грудь -->
+        <path class="muscle-group chest" d="M 88,72 Q 100,74 112,72 L 112,110 Q 100,115 88,110 Z" />
+        <!-- Пресс / Кор -->
+        <path class="muscle-group core" d="M 88,112 Q 100,115 112,112 L 108,160 Q 100,165 92,160 Z" />
+        <!-- Бицепс / Руки -->
+        <path class="muscle-group biceps" d="M 58,87 L 72,92 L 68,125 L 52,120 Z" />
+        <path class="muscle-group biceps" d="M 142,87 L 128,92 L 132,125 L 148,120 Z" />
+        <!-- Предплечья / Пронаторы / Кисти -->
+        <path class="muscle-group forearms" d="M 50,122 L 66,127 L 58,165 L 44,158 Z" />
+        <path class="muscle-group forearms" d="M 150,122 L 134,127 L 142,165 L 156,158 Z" />
+        <!-- Квадрицепсы / Ноги -->
+        <path class="muscle-group legs" d="M 82,165 Q 100,168 100,168 L 96,260 L 78,255 Z" />
+        <path class="muscle-group legs" d="M 118,165 Q 100,168 100,168 L 104,260 L 122,255 Z" />
+        <!-- Икры -->
+        <path class="muscle-group legs" d="M 78,265 L 94,268 L 90,340 L 78,335 Z" />
+        <path class="muscle-group legs" d="M 122,265 L 106,268 L 110,340 L 122,335 Z" />
+      </svg>
+
+      <div class="muscle-legend">
+        <span class="legend-tag" onclick="toggleMuscle('forearms')">Предплечья / Пронатор</span>
+        <span class="legend-tag" onclick="toggleMuscle('biceps')">Бицепс</span>
+        <span class="legend-tag" onclick="toggleMuscle('delts')">Дельты</span>
+        <span class="legend-tag" onclick="toggleMuscle('chest')">Грудь</span>
+        <span class="legend-tag" onclick="toggleMuscle('back')">Спина</span>
+        <span class="legend-tag" onclick="toggleMuscle('legs')">Ноги</span>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>1ПМ Дневник &copy; 2026 PWA</p>
+  </footer>
+
   <script>
-    const workouts = {
-      1: [
-        { name: "Подъем на пронатор с лямкой через кисть", sets: "3 × 12-15", group: "forearms", isArm: true },
-        { name: "Приседания в Гакк-машине", sets: "3 × 15", group: "legs" },
-        { name: "Сгибание ног лежа", sets: "2 × 12", group: "legs" },
-        { name: "Тяга рычажная прямым хватом сверху в тренажере", sets: "2 × 12", group: "back" },
-        { name: "Вертикальная тяга широким прямым хватом к груди", sets: "2 × 12", group: "back" },
-        { name: "Жим гантелей на горизонтальной скамье", sets: "3 × 12", group: "chest" },
-        { name: "Сведение рук в тренажере", sets: "2 × 12", group: "chest" },
-        { name: "Махи гантелями в стороны стоя", sets: "2 × 12", group: "shoulders" },
-        { name: "Французский жим со штангой лежа", sets: "2 × 15", group: "arms" }
-      ],
-      2: [
-        { name: "Пронация на нижнем блоке с ремнем", sets: "3 × 12", group: "forearms", isArm: true },
-        { name: "Сгибание кисти с гантелью", sets: "3 × 12", group: "forearms", isArm: true },
-        { name: "Жим ногами (узкая постановка ног)", sets: "3 × 12", group: "legs" },
-        { name: "Ягодичный мост на одной ноге с гантелью", sets: "3 × 12", group: "legs" },
-        { name: "Подтягивания в Гравитроне широким прямым хватом", sets: "3 × 12", group: "back" },
-        { name: "Жим лёжа в рычажном тренажёре", sets: "3 × 12", group: "chest" },
-        { name: "Разведение гантелей на горизонтальной скамье", sets: "2 × 10", group: "chest" },
-        { name: "Сгибание одной руки на скамье Скотта", sets: "3 × 12", group: "arms" }
-      ],
-      3: [
-        { name: "Подъем на пронатор с отведением", sets: "3 × 12", group: "forearms", isArm: true },
-        { name: "Сгибание рук в стиле «Молоток» с упором в лавку", sets: "2 × 12", group: "forearms", isArm: true },
-        { name: "Выпады вперед с отягощением", sets: "2 × 12", group: "legs" },
-        { name: "Разгибание ног сидя", sets: "2 × 12", group: "legs" },
-        { name: "Тяга рычажная обратным хватом снизу в тренажере", sets: "2 × 12", group: "back" },
-        { name: "Вертикальная тяга с V-образным грифом к груди", sets: "2 × 12", group: "back" },
-        { name: "Жим лёжа в рычажном тренажёре", sets: "3 × 12", group: "chest" },
-        { name: "Сведение рук в кроссовере сверху стоя в наклоне", sets: "2 × 12", group: "chest" }
-      ]
-    };
-
-    let currentDay = 1;
-
-    function getColorForPercent(pct) {
-      if (pct <= 0) return '#2c2c2e';
-      if (pct < 20) return '#ffb74d'; // 1-19% Оранжево-желтый
-      if (pct < 50) return '#4fc3f7'; // 20-49% Голубой
-      if (pct < 80) return '#ba68c8'; // 50-79% Фиолетовый
-      return '#ff5252';               // 80-100% Красный
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js')
+          .then(reg => console.log('SW зарегистрирован:', reg.scope))
+          .catch(err => console.log('Ошибка SW:', err));
+      });
     }
 
-    function switchTab(tabId, btn) {
+    function switchTab(tabId) {
       document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
       document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+      
       document.getElementById(tabId).classList.add('active');
-      btn.classList.add('active');
+      const activeBtn = Array.from(document.querySelectorAll('.tab-btn')).find(btn => btn.getAttribute('onclick').includes(tabId));
+      if (activeBtn) activeBtn.classList.add('active');
     }
 
-    function switchDay(dayNumber) {
-      currentDay = dayNumber;
-      document.querySelectorAll('.day-btn').forEach((btn, idx) => {
-        btn.classList.toggle('active', idx + 1 === dayNumber);
-      });
-      renderWorkout();
-      renderBodyMap();
+    window.addEventListener('DOMContentLoaded', () => {
+      const hash = window.location.hash.replace('#', '');
+      if (hash && document.getElementById(hash)) {
+        switchTab(hash);
+      }
+      renderLogs();
+    });
+
+    function calculate1RM() {
+      const w = parseFloat(document.getElementById('weight').value);
+      const r = parseInt(document.getElementById('reps').value);
+      const resultDiv = document.getElementById('result');
+
+      if (!w || !r || w <= 0 || r <= 0) {
+        resultDiv.innerHTML = '<span style="color:#ff5252; font-size:15px;">Введите корректные данные</span>';
+        return;
+      }
+
+      let rm = 0;
+      if (r === 1) {
+        rm = w;
+      } else {
+        rm = w * (1 + r / 30);
+      }
+
+      const roundedRM = Math.round(rm);
+      resultDiv.innerHTML = `Ваш 1ПМ: ~${roundedRM} кг`;
     }
 
-    function renderWorkout() {
-      const container = document.getElementById('workout-content');
-      const data = workouts[currentDay];
-      container.innerHTML = data.map((ex, index) => `
-        <div class="exercise-item ${ex.isArm ? 'armwrestling' : ''}" id="ex-${currentDay}-${index}">
-          <div class="exercise-info">
-            <h4>${ex.name} ${ex.isArm ? '<span class="exercise-tag">Пронатор/Кисть</span>' : ''}</h4>
-            <p>${ex.sets}</p>
+    function getLogs() {
+      return JSON.parse(localStorage.getItem('1pm_workout_logs') || '[]');
+    }
+
+    function saveLogs(logs) {
+      localStorage.setItem('1pm_workout_logs', JSON.stringify(logs));
+    }
+
+    function addLogEntry() {
+      const name = document.getElementById('ex-name').value.trim() || 'Упражнение';
+      const weight = parseFloat(document.getElementById('ex-weight').value) || 0;
+      const reps = parseInt(document.getElementById('ex-reps').value) || 0;
+      const muscle = document.getElementById('ex-muscle').value;
+
+      if (weight <= 0 || reps <= 0) {
+        alert('Укажите вес и количество повторений');
+        return;
+      }
+
+      const entry = {
+        id: Date.now(),
+        date: new Date().toLocaleDateString('ru-RU', { day: '2-digit', month: '2-digit' }),
+        name,
+        weight,
+        reps,
+        muscle
+      };
+
+      const logs = getLogs();
+      logs.unshift(entry);
+      saveLogs(logs);
+
+      document.getElementById('ex-name').value = '';
+      document.getElementById('ex-weight').value = '';
+      document.getElementById('ex-reps').value = '';
+
+      renderLogs();
+      toggleMuscle(muscle, true);
+    }
+
+    function deleteLogEntry(id) {
+      let logs = getLogs();
+      logs = logs.filter(item => item.id !== id);
+      saveLogs(logs);
+      renderLogs();
+    }
+
+    function renderLogs() {
+      const logs = getLogs();
+      const listContainer = document.getElementById('log-list');
+
+      if (logs.length === 0) {
+        listContainer.innerHTML = '<p style="color:#666; text-align:center; font-size:14px;">История пока пуста</p>';
+        return;
+      }
+
+      listContainer.innerHTML = logs.map(item => `
+        <div class="log-item">
+          <div class="log-info">
+            <h4>${item.name} (${item.date})</h4>
+            <p>${item.weight} кг × ${item.reps} повторов</p>
           </div>
-          <input type="checkbox" onchange="toggleDone(this, 'ex-${currentDay}-${index}')">
+          <button class="del-btn" onclick="deleteLogEntry(${item.id})">✕</button>
         </div>
       `).join('');
     }
 
-    function renderBodyMap() {
-      const data = workouts[currentDay];
-      const counts = { chest: 0, back: 0, legs: 0, shoulders: 0, arms: 0, forearms: 0 };
+    function toggleMuscle(muscleClass, forceActive = false) {
+      const elements = document.querySelectorAll('.' + muscleClass);
+      const tags = Array.from(document.querySelectorAll('.legend-tag')).filter(t => t.getAttribute('onclick').includes(muscleClass));
 
-      data.forEach(ex => {
-        if (counts[ex.group] !== undefined) counts[ex.group]++;
+      elements.forEach(el => {
+        if (forceActive) {
+          el.classList.add('active');
+        } else {
+          el.classList.toggle('active');
+        }
       });
 
-      const total = data.length;
-      const pct = {};
-      for (let k in counts) {
-        pct[k] = Math.round((counts[k] / total) * 100);
-      }
-
-      // Обновление подсветки мышц на SVG
-      document.getElementById('muscle-chest').setAttribute('fill', getColorForPercent(pct.chest));
-      document.getElementById('muscle-core').setAttribute('fill', getColorForPercent(pct.back));
-      document.getElementById('muscle-shoulders-left').setAttribute('fill', getColorForPercent(pct.shoulders));
-      document.getElementById('muscle-shoulders-right').setAttribute('fill', getColorForPercent(pct.shoulders));
-      document.getElementById('muscle-arms-left').setAttribute('fill', getColorForPercent(pct.arms));
-      document.getElementById('muscle-arms-right').setAttribute('fill', getColorForPercent(pct.arms));
-      document.getElementById('muscle-forearms-left').setAttribute('fill', getColorForPercent(pct.forearms));
-      document.getElementById('muscle-forearms-right').setAttribute('fill', getColorForPercent(pct.forearms));
-      document.getElementById('muscle-legs-left').setAttribute('fill', getColorForPercent(pct.legs));
-      document.getElementById('muscle-legs-right').setAttribute('fill', getColorForPercent(pct.legs));
-      document.getElementById('muscle-calves-left').setAttribute('fill', getColorForPercent(pct.legs));
-      document.getElementById('muscle-calves-right').setAttribute('fill', getColorForPercent(pct.legs));
-
-      // Обновление текста меток
-      document.getElementById('lbl-forearms').textContent = `Пронатор: ${pct.forearms}%`;
-      document.getElementById('lbl-shoulders').textContent = `Плечи: ${pct.shoulders}%`;
-      document.getElementById('lbl-legs').textContent = `Ноги: ${pct.legs}%`;
-      document.getElementById('lbl-chest').textContent = `Грудь: ${pct.chest}%`;
-      document.getElementById('lbl-arms').textContent = `Руки: ${pct.arms}%`;
-      document.getElementById('lbl-back').textContent = `Спина: ${pct.back}%`;
-    }
-
-    function toggleDone(checkbox, itemClass) {
-      const item = document.getElementById(itemClass);
-      item.classList.toggle('done', checkbox.checked);
-    }
-
-    function calculate1RM() {
-      const weight = parseFloat(document.getElementById('weight').value);
-      const reps = parseInt(document.getElementById('reps').value);
-      if (weight && reps) {
-        const rm = Math.round(weight * (1 + reps / 30) * 10) / 10;
-        document.getElementById('result').innerText = `Ваш 1ПМ: ~${rm} кг`;
-      } else {
-        document.getElementById('result').innerText = 'Заполните все поля';
-      }
-    }
-
-    /* Таймер */
-    let timerSeconds = 90;
-    let timerInitial = 90;
-    let timerInterval = null;
-
-    function updateTimerDisplay() {
-      const mins = Math.floor(timerSeconds / 60).toString().padStart(2, '0');
-      const secs = (timerSeconds % 60).toString().padStart(2, '0');
-      document.getElementById('timer-display').innerText = `${mins}:${secs}`;
-    }
-
-    function setTimer(sec) {
-      pauseTimer();
-      timerSeconds = sec;
-      timerInitial = sec;
-      updateTimerDisplay();
-    }
-
-    function startTimer() {
-      if (timerInterval) return;
-      timerInterval = setInterval(() => {
-        if (timerSeconds > 0) {
-          timerSeconds--;
-          updateTimerDisplay();
+      tags.forEach(t => {
+        if (forceActive) {
+          t.classList.add('active');
         } else {
-          pauseTimer();
-          playSignal();
-          sendNotification("Отдых завершен!", "Пора выполнять следующий подход.");
-        }
-      }, 1000);
-    }
-
-    function pauseTimer() {
-      clearInterval(timerInterval);
-      timerInterval = null;
-    }
-
-    function resetTimer() {
-      pauseTimer();
-      timerSeconds = timerInitial;
-      updateTimerDisplay();
-    }
-
-    function playSignal() {
-      try {
-        const ctx = new (window.AudioContext || window.webkitAudioContext)();
-        const osc = ctx.createOscillator();
-        const gain = ctx.createGain();
-        osc.connect(gain);
-        gain.connect(ctx.destination);
-        osc.type = 'sine';
-        osc.frequency.value = 880;
-        osc.start();
-        setTimeout(() => { osc.stop(); ctx.close(); }, 600);
-      } catch (e) {}
-    }
-
-    /* Уведомления */
-    function enableNotifications() {
-      if (!("Notification" in window)) {
-        document.getElementById('notification-status').innerText = "Уведомления не поддерживаются браузером";
-        return;
-      }
-
-      Notification.requestPermission().then(permission => {
-        if (permission === "granted") {
-          document.getElementById('notification-status').innerText = "Уведомления включены";
-          sendNotification("Уведомления настроены", "Вы получите напоминание об отдыхе и тренировке.");
-        } else {
-          document.getElementById('notification-status').innerText = "Доступ к уведомлениям отклонен";
+          t.classList.toggle('active');
         }
       });
     }
-
-    function sendNotification(title, body) {
-      if ("Notification" in window && Notification.permission === "granted") {
-        new Notification(title, { body: body, icon: 'https://dummyimage.com/512x512/ff9800/ffffff.png&text=P' });
-      }
-    }
-
-    // Инициализация
-    renderWorkout();
-    renderBodyMap();
-    updateTimerDisplay();
   </script>
 </body>
 </html>
