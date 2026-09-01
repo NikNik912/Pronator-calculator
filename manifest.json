@@ -4,8 +4,10 @@
   "description": "Приложение для расчета 1ПМ и ведения тренировок пронации в армрестлинге",
   "start_url": "index.html",
   "display": "standalone",
+  "orientation": "portrait",
   "background_color": "#121212",
   "theme_color": "#ff9800",
+  "categories": ["sports", "utilities"],
   "icons": [
     {
       "src": "https://dummyimage.com/512x512/ff9800/ffffff.png&text=P",
@@ -18,6 +20,15 @@
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "https://dummyimage.com/1080x1920/121212/ff9800.png&text=Pronator+App",
+      "sizes": "1080x1920",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Главный экран"
     }
   ]
 }
