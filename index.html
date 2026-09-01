@@ -751,7 +751,28 @@
         document.querySelector('.tab-btn[onclick*="diary"]').click();
         startTimer();
       }
-    });
+    });// 1. Регистрация Service Worker
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js');
+  });
+}
+
+// 2. Обработка переходов из быстрых ярлыков / виджета
+window.addEventListener('DOMContentLoaded', () => {
+  const urlParams = new URLSearchParams(window.location.search);
+  const action = urlParams.get('action');
+
+  if (action === 'add_set') {
+    document.querySelector('.tab-btn[onclick*="diary"]')?.click();
+    setTimeout(() => {
+      document.getElementById('ex-weight')?.focus();
+    }, 300);
+  } else if (action === 'timer') {
+    document.querySelector('.tab-btn[onclick*="diary"]')?.click();
+    if (typeof startTimer === 'function') startTimer();
+  }
+});
  </script>
 </body>
 </html>
